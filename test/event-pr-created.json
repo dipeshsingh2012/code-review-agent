@@ -1,0 +1,18 @@
+{
+  "headers": {
+    "x-github-event": "pull_request"
+  },
+  "body": {
+    "action": "opened",
+    "pull_request": {
+      "number": 42,
+      "title": "feat: add participant modal",
+      "head": { "sha": "abc123" },
+      "base": { "sha": "def456" }
+    },
+    "repository": {
+      "name": "oeimaging-app",
+      "owner": { "login": "your-github-username" }
+    }
+  }
+}

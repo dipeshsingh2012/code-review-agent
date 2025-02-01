@@ -1,0 +1,18 @@
+{
+  "name": "code-review-agent",
+  "version": "2.0.0",
+  "description": "AI-powered code review agent for GitHub PRs using Google Gemini on GCP",
+  "main": "src/handler.js",
+  "scripts": {
+    "start": "functions-framework --target=codeReviewHandler --port=8080",
+    "test": "node test/run.js",
+    "deploy": "gcloud functions deploy code-review-agent --runtime=nodejs20 --trigger-http --allow-unauthenticated --entry-point=codeReviewHandler --source=. --set-env-vars GEMINI_API_KEY=$GEMINI_API_KEY,GITHUB_TOKEN=$GITHUB_TOKEN"
+  },
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.3.0",
+    "@google/generative-ai": "^0.21.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

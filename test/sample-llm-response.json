@@ -1,0 +1,26 @@
+{
+  "summary": "Found 3 issues: a potential performance problem with inline object creation, a missing dependency in useEffect, and an accessibility gap.",
+  "issues": [
+    {
+      "type": "performance",
+      "severity": "high",
+      "file": "src/components/AddParticipantModal/AddParticipantModal.tsx",
+      "line": "45",
+      "suggestion": "The `sx` prop creates a new object on every render, causing unnecessary re-renders of child MUI components. Extract it to a constant or use `useMemo` if it depends on props/state."
+    },
+    {
+      "type": "bug",
+      "severity": "high",
+      "file": "src/hooks/useParticipants/useParticipants.ts",
+      "line": "23-28",
+      "suggestion": "The useEffect dependency array is missing `studyId`. This will cause stale closures and the effect won't re-run when the study changes."
+    },
+    {
+      "type": "accessibility",
+      "severity": "medium",
+      "file": "src/components/AddParticipantModal/AddParticipantModal.tsx",
+      "line": "78",
+      "suggestion": "The modal's close button lacks an aria-label. Add `aria-label=\"Close dialog\"` for screen reader users."
+    }
+  ]
+}
