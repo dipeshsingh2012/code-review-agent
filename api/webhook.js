@@ -1,16 +1,15 @@
-const functions = require("@google-cloud/functions-framework");
-const { getDiff, postReviewComment } = require("./githubService");
-const { reviewCode } = require("./llmService");
-const { formatReview } = require("./reviewFormatter");
-const { notify } = require("./notifier");
+const { getDiff, postReviewComment } = require("../src/githubService");
+const { reviewCode } = require("../src/llmService");
+const { formatReview } = require("../src/reviewFormatter");
+const { notify } = require("../src/notifier");
 
-const WEBHOOK_SECRET = process.env.GITHUB_WEBHOOK_SECRET;
 const MAX_DIFF_CHARS = 12000;
 const FRONTEND_EXTENSIONS = /\.(js|jsx|ts|tsx)$/;
 
-functions.http("codeReviewHandler", async (req, res) => {
-  const event = req.headers["x-github-event"];
+module.exports = async (req, res) => {
+  if (req.method !== "POST") return res.status(200).send("OK");
 
+  const event = req.headers["x-github-event"];
   if (event === "ping") return res.status(200).send("pong");
   if (event !== "pull_request") return res.status(200).send("ignored");
 
@@ -52,7 +51,7 @@ functions.http("codeReviewHandler", async (req, res) => {
     console.error("Code review agent failed:", err);
     res.status(500).send("Internal error");
   }
-});
+};
 
 function chunkDiffs(diffs, maxChars) {
   const chunks = [];
