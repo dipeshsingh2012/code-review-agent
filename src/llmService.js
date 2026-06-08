@@ -3,7 +3,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 if (!process.env.GEMINI_API_KEY) throw new Error("GEMINI_API_KEY is required");
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const MODEL_NAME = process.env.GEMINI_MODEL || "gemini-2.0-flash-lite";
+const MODEL_NAME = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 const MAX_RETRIES = 2;
 const RETRY_DELAY_MS = 1500;
 
